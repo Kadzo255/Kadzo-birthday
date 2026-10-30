@@ -1,54 +1,76 @@
 const notes = {
   birthday: {
     title: "Happy birthday, Kadzo.",
-    text: "I know birthdays might not be your biggest thing, so I'm not here to make you celebrate in any particular way. I just wanted to take a moment to remind you that you're appreciated. I hope this new chapter brings you beautiful experiences, new places, good food, genuine happiness and plenty of reasons to smile. Have a lovely day, birthday girl."
+    message: `Today is yours, and I hope you get to enjoy it in whatever way feels right to you.
+
+I hope this new chapter brings you beautiful experiences, new places to explore, good food, genuine happiness and plenty of reasons to smile.
+
+May the year ahead be kind to you and give you so many things worth looking forward to.
+
+Have a beautiful birthday.`
   },
 
   appreciation: {
-    title: "A little appreciation.",
-    text: "One thing I hope you never forget is that the little things about you matter too. Your eye for style, your love for capturing moments, your interests and all those little details that make you who you are. I hope life keeps giving you beautiful things to experience and remember."
+    title: "A reminder about you.",
+    message: `I hope you never lose the things that make you unmistakably you.
+
+Your eye for style, your love for capturing moments, your interests and all those little details that make up your personality.
+
+Keep exploring, keep discovering new things and keep being yourself.
+
+There's so much more ahead of you.`
   },
 
   random: {
     title: "For another day.",
-    text: "If you ever come across this on an ordinary day, here's your reminder to enjoy the little things. Take the pictures, try the food, visit the places, wear the outfit and make memories. You don't have to wait for a special occasion to enjoy life."
+    message: `Here's a reminder for an ordinary day:
+
+Take the pictures. Wear the outfit. Try the food. Visit the place you've been saving on Pinterest. Make the memories.
+
+Life has so many beautiful experiences waiting for you.
+
+I hope you get to enjoy as many of them as possible.`
   }
 };
 
 const modal = document.getElementById("noteModal");
-const noteTitle = document.getElementById("noteTitle");
-const noteText = document.getElementById("noteText");
-const closeButton = document.querySelector(".close-modal");
+const modalTitle = document.getElementById("noteTitle");
+const modalText = document.getElementById("noteText");
+const closeButton = document.getElementById("close-modal");
 
 document.querySelectorAll(".note-card").forEach((button) => {
   button.addEventListener("click", () => {
-    const note = notes[button.dataset.note];
+    const noteName = button.dataset.note;
+    const selectedNote = notes[noteName];
 
-    if (!note) return;
+    if (!selectedNote) return;
 
-    noteTitle.textContent = note.title;
-    noteText.textContent = note.text;
+    modalTitle.textContent = selectedNote.title;
+    modalText.textContent = selectedNote.message;
 
     modal.classList.add("show");
     modal.setAttribute("aria-hidden", "false");
+
+    document.body.style.overflow = "hidden";
   });
 });
 
-function closeNote() {
+function closeModal() {
   modal.classList.remove("show");
   modal.setAttribute("aria-hidden", "true");
+  document.body.style.overflow = "";
 }
 
-closeButton.addEventListener("click", closeNote);
+closeButton.addEventListener("click", closeModal);
 
 modal.addEventListener("click", (event) => {
   if (event.target === modal) {
-    closeNote();
+    closeModal();
   }
 });
 
 document.addEventListener("keydown", (event) => {
   if (event.key === "Escape") {
-    closeNote();
+    closeModal();
   }
 });
