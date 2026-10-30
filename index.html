@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Kadzo — A Special Edition</title>
+  <meta name="description" content="A little corner of the internet, dedicated to Kadzo.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Playfair+Display:ital,wght@0,500;0,600;0,700;1,500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+  <header class="topbar">
+    <a class="brand" href="#">K.</a>
+    <span class="edition">THE BIRTHDAY EDITION · 01 NOVEMBER</span>
+    <a class="top-link" href="#letter">A LITTLE NOTE ↗</a>
+  </header>
+
+  <main>
+    <section class="hero">
+      <div class="hero-copy">
+        <p class="eyebrow">A SPECIAL EDITION · 01.11.2026</p>
+        <h1>Today, the<br>world gets a<br><em>little brighter.</em></h1>
+        <p class="intro">A little corner of the internet, dedicated to someone worth celebrating — in her own way.</p>
+        <a class="discover" href="#story">SCROLL TO DISCOVER <span>↓</span></a>
+      </div>
+
+      <div class="hero-image image-placeholder">
+        <img src="assets/portrait-1.jpg" alt="A photo of Kadzo">
+        <span class="image-caption">THE GIRL OF THE DAY · KADZO EMMANUEL</span>
+      </div>
+
+      <span class="side-note">A DAY WORTH NOTICING — 2026</span>
+    </section>
+
+    <section class="story section" id="story">
+      <div class="section-label">01 / THE COVER STORY</div>
+      <div class="story-content">
+        <p class="eyebrow">NOT JUST ANOTHER DAY</p>
+        <h2>Some people make<br>ordinary things feel<br><em>a little less ordinary.</em></h2>
+        <p class="body-copy">And today is a good excuse to appreciate one of them. No big celebration required. No pressure to make a fuss. Just a small reminder that your existence is worth celebrating.</p>
+      </div>
+      <div class="story-image">
+        <img src="assets/portrait-2.jpg" alt="Another lovely photo of Kadzo">
+        <span>AN APPRECIATION, NOT AN OCCASION TO MAKE A FUSS.</span>
+      </div>
+    </section>
+
+    <section class="qualities section">
+      <div class="section-label">02 / THE LITTLE DETAILS</div>
+      <div class="qualities-heading">
+        <p class="eyebrow">THINGS THAT MAKE YOU, YOU</p>
+        <h2>A collection of<br><em>little things.</em></h2>
+      </div>
+      <div class="quality-grid">
+        <article><span>01</span><h3>The eye for style.</h3><p>The outfits, the details, the way you put things together.</p></article>
+        <article><span>02</span><h3>The camera roll.</h3><p>Because some moments deserve more than just a memory.</p></article>
+        <article><span>03</span><h3>The little adventures.</h3><p>New places, good food, movies and everything in between.</p></article>
+        <article><span>04</span><h3>The flower girl.</h3><p>A reminder that beautiful things can be simple.</p></article>
+      </div>
+    </section>
+
+    <section class="gallery section">
+      <div class="section-label">03 / THE PHOTO JOURNAL</div>
+      <div class="gallery-heading">
+        <div><p class="eyebrow">A FEW FRAMES</p><h2>Moments in <em>her frame.</em></h2></div>
+        <p>Because a picture can hold a whole little world.</p>
+      </div>
+      <div class="gallery-grid">
+        <img src="assets/gallery-1.jpg" alt="Kadzo photo one">
+        <img src="assets/gallery-2.jpg" alt="Kadzo photo two">
+        <img src="assets/gallery-3.jpg" alt="Kadzo photo three">
+      </div>
+    </section>
+
+    <section class="notes section" id="letter">
+      <div class="section-label">04 / OPEN WHEN YOU FEEL LIKE IT</div>
+      <p class="eyebrow">A FEW WORDS, JUST BECAUSE</p>
+      <h2>Little notes<br><em>for you.</em></h2>
+      <p class="notes-intro">No need to open them all at once. Take your time.</p>
+
+      <div class="note-grid">
+        <button class="note-card" data-note="birthday"><span>01</span><strong>For your birthday</strong><small>OPEN THIS NOTE ↗</small></button>
+        <button class="note-card" data-note="appreciation"><span>02</span><strong>A little appreciation</strong><small>OPEN THIS NOTE ↗</small></button>
+        <button class="note-card" data-note="random"><span>03</span><strong>For another day</strong><small>OPEN THIS NOTE ↗</small></button>
+      </div>
+    </section>
+
+    <section class="closing">
+      <p class="eyebrow">AND BEFORE YOU GO...</p>
+      <h2>Here's to another<br>chapter of <em>you.</em></h2>
+      <p>Happy birthday, Kadzo.</p>
+      <span class="closing-star">✳</span>
+      <small>MADE WITH THOUGHT · 01 NOVEMBER 2026</small>
+    </section>
+  </main>
+
+  <footer><span>K.</span><span>A LITTLE WEBSITE FOR KADZO EMMANUEL</span><span>2026</span></footer>
+
+  <div class="modal" id="noteModal" aria-hidden="true">
+    <div class="modal-content">
+      <button class="close-modal" aria-label="Close note">×</button>
+      <p class="eyebrow">A LITTLE NOTE FOR YOU</p>
+      <h2 id="noteTitle"></h2>
+      <p id="noteText"></p>
+    </div>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>
