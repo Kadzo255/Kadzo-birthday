@@ -33,6 +33,8 @@ I hope you get to enjoy as many of them as possible.`
   }
 };
 
+// BIRTHDAY NOTES
+
 const modal = document.getElementById("noteModal");
 const modalTitle = document.getElementById("noteTitle");
 const modalText = document.getElementById("noteText");
@@ -74,3 +76,58 @@ document.addEventListener("keydown", (event) => {
     closeModal();
   }
 });
+
+// BIRTHDAY MUSIC
+
+const welcomeScreen = document.getElementById("welcomeScreen");
+const enterButton = document.getElementById("enterSite");
+const birthdayMusic = document.getElementById("birthdayMusic");
+const musicPlayer = document.getElementById("musicPlayer");
+const musicToggle = document.getElementById("musicToggle");
+const musicIndicator = document.getElementById("musicIndicator");
+
+function updateMusicControls() {
+  if (birthdayMusic.paused) {
+    musicToggle.textContent = "▶";
+    musicToggle.setAttribute("aria-label", "Play music");
+    musicIndicator.textContent = "♫";
+  } else {
+    musicToggle.textContent = "Ⅱ";
+    musicToggle.setAttribute("aria-label", "Pause music");
+    musicIndicator.textContent = "♫";
+  }
+}
+
+async function playBirthdayMusic() {
+  try {
+    await birthdayMusic.play();
+    updateMusicControls();
+  } catch (error) {
+    console.log("Music could not start. Tap the play button to try again.");
+    updateMusicControls();
+  }
+}
+
+// ENTER THE WEBSITE AND START MUSIC
+
+enterButton.addEventListener("click", () => {
+  welcomeScreen.classList.add("hide");
+  musicPlayer.classList.add("visible");
+
+  playBirthdayMusic();
+});
+
+// PLAY AND PAUSE
+
+musicToggle.addEventListener("click", () => {
+  if (birthdayMusic.paused) {
+    playBirthdayMusic();
+  } else {
+    birthdayMusic.pause();
+    updateMusicControls();
+  }
+});
+
+birthdayMusic.addEventListener("play", updateMusicControls);
+birthdayMusic.addEventListener("pause", updateMusicControls);
+birthdayMusic.addEventListener("ended", updateMusicControls);
