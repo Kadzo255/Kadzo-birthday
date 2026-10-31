@@ -1,139 +1,114 @@
-document.addEventListener("DOMContentLoaded", function () {
+const welcomeScreen = document.getElementById("welcomeScreen");
+const enterButton = document.getElementById("enterButton");
+const music = document.getElementById("backgroundMusic");
+const musicButton = document.getElementById("musicButton");
+const musicIcon = document.getElementById("musicIcon");
+const musicText = document.getElementById("musicText");
 
-  const music = document.getElementById("birthdayMusic");
-  const welcomeScreen = document.getElementById("welcomeScreen");
-  const enterButton = document.getElementById("enterSite");
-  const musicPlayer = document.getElementById("musicPlayer");
-  const musicToggle = document.getElementById("musicToggle");
+let musicStarted = false;
 
-  function updateMusicButton() {
-    if (!music || !musicToggle) return;
+function updateMusicButton() {
+  if (music.paused) {
+    musicIcon.textContent = "♫";
+    musicText.textContent = "PLAY MUSIC";
+  } else {
+    musicIcon.textContent = "Ⅱ";
+    musicText.textContent = "PAUSE MUSIC";
+  }
+}
 
-    const playing = !music.paused;
+// Start the website and attempt to play music
+enterButton.addEventListener("click", async () => {
+  welcomeScreen.classList.add("hide");
 
-    musicToggle.textContent = playing ? "Ⅱ" : "▶";
-    musicToggle.setAttribute(
-      "aria-label",
-      playing ? "Pause music" : "Play music"
+  try {
+    await music.play();
+    musicStarted = true;
+  } catch (error) {
+    console.error("Music playback failed:", error);
+    alert(
+      "The birthday page opened, but the song could not play. Check the release audio link."
     );
   }
 
-  async function playMusic() {
-    if (!music) return;
+  updateMusicButton();
+});
 
+// Play and pause control
+musicButton.addEventListener("click", async () => {
+  if (music.paused) {
     try {
       await music.play();
-      updateMusicButton();
+      musicStarted = true;
     } catch (error) {
-      console.error("Music playback error:", error);
-      updateMusicButton();
-      alert("The song could not play. Check that fire-on-fire.mp3 is uploaded beside index.html.");
+      console.error("Music playback failed:", error);
+      alert("The song could not play. Please check the audio file link.");
     }
+  } else {
+    music.pause();
   }
-
-  if (enterButton) {
-    enterButton.addEventListener("click", function () {
-      welcomeScreen.classList.add("hide");
-      musicPlayer.classList.add("visible");
-      playMusic();
-    });
-  }
-
-  if (musicToggle) {
-    musicToggle.addEventListener("click", function () {
-      if (music.paused) {
-        playMusic();
-      } else {
-        music.pause();
-        updateMusicButton();
-      }
-    });
-  }
-
-  if (music) {
-    music.addEventListener("play", updateMusicButton);
-    music.addEventListener("pause", updateMusicButton);
-    music.addEventListener("error", function () {
-      console.error("Could not load fire-on-fire.mp3. Check the filename.");
-      updateMusicButton();
-    });
-  }
-
-  const notes = {
-    birthday: {
-      title: "Happy birthday, Kadzo.",
-      message: `Today is yours, and I hope you get to enjoy it in whatever way feels right to you.
-
-I hope this new chapter brings you beautiful experiences, new places to explore, good food, genuine happiness and plenty of reasons to smile.
-
-May the year ahead be kind to you and give you so many things worth looking forward to.
-
-Have a beautiful birthday.`
-    },
-
-    appreciation: {
-      title: "A reminder about you.",
-      message: `I hope you never lose the things that make you unmistakably you.
-
-Your eye for style, your interests and all those little details that make up your personality.
-
-Keep exploring, keep discovering new things and keep being yourself.
-
-There's so much more ahead of you.`
-    },
-
-    random: {
-      title: "For another day.",
-      message: `Here's a reminder for an ordinary day:
-
-Take the pictures. Wear the outfit. Try the food. Visit the place you've been saving. Make the memories.
-
-Life has so many beautiful experiences waiting for you.
-
-I hope you get to enjoy as many of them as possible.`
-    }
-  };
-
-  const modal = document.getElementById("noteModal");
-  const modalTitle = document.getElementById("noteTitle");
-  const modalText = document.getElementById("noteText");
-  const closeButton = document.getElementById("close-modal");
-
-  document.querySelectorAll(".note-card").forEach(function (button) {
-    button.addEventListener("click", function () {
-      const note = notes[button.dataset.note];
-
-      if (!note) return;
-
-      modalTitle.textContent = note.title;
-      modalText.textContent = note.message;
-
-      modal.classList.add("show");
-      modal.setAttribute("aria-hidden", "false");
-      document.body.style.overflow = "hidden";
-    });
-  });
-
-  function closeModal() {
-    modal.classList.remove("show");
-    modal.setAttribute("aria-hidden", "true");
-    document.body.style.overflow = "";
-  }
-
-  closeButton.addEventListener("click", closeModal);
-
-  modal.addEventListener("click", function (event) {
-    if (event.target === modal) {
-      closeModal();
-    }
-  });
-
-  document.addEventListener("keydown", function (event) {
-    if (event.key === "Escape") {
-      closeModal();
-    }
-  });
 
   updateMusicButton();
+});
 
+// Keep the button updated
+music.addEventListener("play", updateMusicButton);
+music.addEventListener("pause", updateMusicButton);
+music.addEventListener("ended", updateMusicButton);
+
+// Notes content
+const notes = {
+  noteOne: {
+    title: "For your smile",
+    message:
+      "I hope you always have reasons to smile, even on the ordinary days. Never underestimate how much joy the little things can bring."
+  },
+
+  noteTwo: {
+    title: "For your dreams",
+    message:
+      "I hope you keep exploring, trying new things and going after the life you imagine for yourself. Don't make yourself smaller for anyone."
+  },
+
+  noteThree: {
+    title: "For the year ahead",
+    message:
+      "May this new chapter bring you peace, beautiful surprises, unforgettable experiences and moments that remind you how much life has to offer."
+  }
+};
+
+const noteModal = document.getElementById("noteModal");
+const noteTitle = document.getElementById("noteTitle");
+const noteMessage = document.getElementById("noteMessage");
+const closeModal = document.getElementById("closeModal");
+
+// Open a note
+document.querySelectorAll(".note-card").forEach((button) => {
+  button.addEventListener("click", () => {
+    const selectedNote = notes[button.dataset.note];
+
+    if (!selectedNote) return;
+
+    noteTitle.textContent = selectedNote.title;
+    noteMessage.textContent = selectedNote.message;
+    noteModal.classList.add("show");
+  });
+});
+
+// Close popup
+closeModal.addEventListener("click", () => {
+  noteModal.classList.remove("show");
+});
+
+noteModal.addEventListener("click", (event) => {
+  if (event.target === noteModal) {
+    noteModal.classList.remove("show");
+  }
+});
+
+// Close popup with Escape key
+document.addEventListener("keydown", (event) => {
+  if (event.key === "Escape") {
+    noteModal.classList.remove("show");
+  }
 });
