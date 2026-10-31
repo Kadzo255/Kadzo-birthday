@@ -5,54 +5,34 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="theme-color" content="#111111">
   <title>Kadzo Day | The Birthday Edition</title>
-
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Playfair+Display:ital,wght@0,500;0,600;0,700;1,500;1,600&display=swap" rel="stylesheet">
-
   <link rel="stylesheet" href="style.css">
 </head>
-
 <body>
 
-  <!-- WELCOME SCREEN -->
   <div class="welcome-screen" id="welcomeScreen">
     <div class="welcome-content">
       <p class="eyebrow">A LITTLE SOMETHING FOR YOU</p>
-
       <div class="welcome-symbol">✧</div>
-
-      <h1>A day made<br> <em>just for you.</em></h1>
-
-      <p class="welcome-description">
-        A little collection of moments, words and wishes.
-        Take your time and enjoy every part of it.
-      </p>
-
-      <button class="welcome-button" id="enterSite">
-        ENTER YOUR DAY <span>↗</span>
-      </button>
-
+      <h1>A day made<br><em>just for you.</em></h1>
+      <p class="welcome-description">A little collection of moments, words and wishes. Take your time and enjoy every part of it.</p>
+      <button class="welcome-button" id="enterSite">ENTER YOUR DAY <span>↗</span></button>
       <span class="welcome-footer">THE KADZO EDITION · NOVEMBER 01</span>
     </div>
   </div>
 
-  <!-- BACKGROUND MUSIC -->
-  <audio id="birthdayMusic" src="fire-on-fire.mp3" preload="none" loop></audio>
+  <audio id="birthdayMusic" preload="metadata" loop>
+    <source src="fire-on-fire.mp3" type="audio/mpeg">
+  </audio>
 
-  <!-- FLOATING MUSIC PLAYER -->
   <div class="music-player" id="musicPlayer">
     <div class="music-details">
       <span class="music-indicator" id="musicIndicator">♫</span>
-      <div>
-        <strong>Fire on Fire</strong>
-        <small>Sam Smith</small>
-      </div>
+      <div><strong>Fire on Fire</strong><small>Sam Smith</small></div>
     </div>
-
-    <button id="musicToggle" class="music-toggle" aria-label="Pause music">
-      Ⅱ
-    </button>
+    <button id="musicToggle" class="music-toggle" type="button" aria-label="Play music">▶</button>
   </div>
 
   <div class="announcement">
@@ -67,8 +47,6 @@
   </header>
 
   <main>
-
-    <!-- COVER -->
     <section class="cover">
       <div class="cover-top">
         <span>VOLUME 001</span>
@@ -80,16 +58,8 @@
         <div class="cover-title">
           <p class="eyebrow">A DAY WORTH CELEBRATING</p>
           <h1>KAD<span>ZO.</span></h1>
-
-          <p class="cover-description">
-            Today isn't just another date on the calendar.
-            It's Kadzo Day. And honestly, that deserves
-            its own national holiday.
-          </p>
-
-          <a href="#the-story" class="primary-button">
-            EXPLORE THE EDITION <span>↘</span>
-          </a>
+          <p class="cover-description">Today isn't just another date on the calendar. It's Kadzo Day. And honestly, that deserves its own national holiday.</p>
+          <a href="#the-story" class="primary-button">EXPLORE THE EDITION <span>↘</span></a>
         </div>
 
         <div class="cover-image">
@@ -104,172 +74,108 @@
       </div>
     </section>
 
-    <!-- INTRODUCTION -->
     <section class="story section-padding" id="the-story">
       <div class="section-number">01 / THE OCCASION</div>
-
       <div class="story-grid">
         <div>
           <p class="eyebrow">TODAY'S HEADLINE</p>
-          <h2>
-            Today is not<br>
-            just another day.<br>
-            <em>It's KADZO DAY.</em>
-          </h2>
+          <h2>Today is not<br>just another day.<br><em>It's KADZO DAY.</em></h2>
         </div>
-
         <div class="story-copy">
-          <p>
-            Today deserves the full spotlight. It's your birthday,
-            and I wanted to create something that celebrates you
-            properly — your style, your personality, your stories,
-            and everything that makes you unmistakably you.
-          </p>
-
-          <p class="signature">
-            — Official notice: today is Kadzo Day.
-          </p>
+          <p>Today deserves the full spotlight. It's your birthday, and I wanted to create something that celebrates you properly — your style, your personality, your stories, and everything that makes you unmistakably you.</p>
+          <p class="signature">— Official notice: today is Kadzo Day.</p>
         </div>
       </div>
     </section>
 
-    <!-- FEATURE -->
     <section class="feature section-padding">
       <div class="feature-image">
         <img src="kadzo 3.jpg" alt="Birthday girl">
       </div>
-
       <div class="feature-text">
         <p class="eyebrow">THE MAIN CHARACTER</p>
         <h2>There is only<br>one <em>Kadzo.</em></h2>
-
-        <p>
-          A distinct sense of style, an eye for beautiful things,
-          and a way of making ordinary moments worth remembering.
-          This edition could only ever be about one person.
-        </p>
-
+        <p>A distinct sense of style, an eye for beautiful things, and a way of making ordinary moments worth remembering. This edition could only ever be about one person.</p>
         <div class="feature-line"></div>
-
-        <p class="feature-quote">
-          Some people deserve to be celebrated in full colour.
-          Today, that person is you.
-        </p>
+        <p class="feature-quote">Some people deserve to be celebrated in full colour. Today, that person is you.</p>
       </div>
     </section>
 
-    <!-- HER INTERESTS -->
     <section class="interests section-padding">
       <div class="section-heading">
         <div>
           <p class="eyebrow">A FEW OF HER FAVORITE THINGS</p>
           <h2>The Kadzo <em>universe.</em></h2>
         </div>
-
         <span class="section-number">02 / HER WORLD</span>
       </div>
 
       <div class="interest-grid">
-
         <article class="interest-card">
           <span class="interest-number">01</span>
           <span class="interest-icon">✿</span>
           <h3>Flowers</h3>
           <p>Because beautiful things deserve to be appreciated.</p>
         </article>
-
         <article class="interest-card">
           <span class="interest-number">02</span>
           <span class="interest-icon">✧</span>
           <h3>Fashion</h3>
           <p>Personal style. Good taste. The perfect outfit.</p>
         </article>
-
         <article class="interest-card">
           <span class="interest-number">03</span>
           <span class="interest-icon">▣</span>
           <h3>Memories</h3>
           <p>Pictures, videos and moments worth keeping.</p>
         </article>
-
         <article class="interest-card">
           <span class="interest-number">04</span>
           <span class="interest-icon">⌁</span>
           <h3>Adventures</h3>
           <p>New places, good food and stories to tell.</p>
         </article>
-
       </div>
     </section>
 
-    <!-- PHOTO GALLERY -->
     <section class="gallery-section section-padding">
       <div class="section-heading">
         <div>
           <p class="eyebrow">THE PHOTO DIARY</p>
           <h2>Frames of <em>you.</em></h2>
         </div>
-
         <span class="section-number">03 / THE GALLERY</span>
       </div>
 
       <div class="gallery-grid">
-
         <div class="gallery-item gallery-large">
           <img src="kadzo 5.jpg" alt="Kadzo photo">
           <span>THE MOMENT</span>
         </div>
-
         <div class="gallery-item">
           <img src="kadzo 6.jpg" alt="Kadzo photo">
           <span>THE DETAILS</span>
         </div>
-
         <div class="gallery-item">
           <img src="kadzo 8.jpg" alt="Kadzo photo">
           <span>THE MEMORIES</span>
         </div>
-
       </div>
     </section>
 
-    <!-- QUIETER DAYS -->
     <section class="quiet-section section-padding">
       <div class="quiet-content">
-
         <p class="eyebrow">A THOUGHT JUST FOR YOU</p>
-
         <span class="quiet-symbol">✧</span>
+        <h2>Even on the<br><em>quieter days.</em></h2>
+        <p>I know there are days when you feel like talking less, keeping to yourself or simply enjoying your own space. And that's okay. You don't always have to have something to say, explain how you're feeling or pretend to be in a particular mood.
 
-        <h2>
-          Even on the<br>
-          <em>quieter days.</em>
-        </h2>
-
-        <p>
-          I know there are days when you feel like talking less,
-          keeping to yourself or simply enjoying your own space.
-          And that's okay.
-
-          You don't always have to have something to say,
-          explain how you're feeling or pretend to be in a
-          particular mood.
-
-          I hope you always give yourself room to feel,
-          rest and just be. You deserve kindness on the
-          quiet days too, not just the happy and exciting ones.
-        </p>
-
-        <span class="quiet-signature">
-          You don't have to be anything other than yourself.
-        </span>
-
+I hope you always give yourself room to feel, rest and just be. You deserve kindness on the quiet days too, not just the happy and exciting ones.</p>
+        <span class="quiet-signature">You don't have to be anything other than yourself.</span>
       </div>
     </section>
 
-    <!-- BIRTHDAY NOTES -->
     <section class="notes-section section-padding" id="birthday-message">
-
       <div class="notes-heading">
         <p class="eyebrow">SOMETHING FOR YOU</p>
         <h2>Open when <em>you feel like it.</em></h2>
@@ -277,8 +183,7 @@
       </div>
 
       <div class="notes-grid">
-
-        <button class="note-card" data-note="birthday">
+        <button class="note-card" type="button" data-note="birthday">
           <span class="note-symbol">01</span>
           <span class="note-icon">✉</span>
           <strong>A birthday note</strong>
@@ -286,7 +191,7 @@
           <span class="note-open">OPEN NOTE ↗</span>
         </button>
 
-        <button class="note-card" data-note="appreciation">
+        <button class="note-card" type="button" data-note="appreciation">
           <span class="note-symbol">02</span>
           <span class="note-icon">✧</span>
           <strong>A reminder</strong>
@@ -294,37 +199,23 @@
           <span class="note-open">OPEN NOTE ↗</span>
         </button>
 
-        <button class="note-card" data-note="random">
+        <button class="note-card" type="button" data-note="random">
           <span class="note-symbol">03</span>
           <span class="note-icon">♡</span>
           <strong>For another day</strong>
           <small>Not just for birthdays</small>
           <span class="note-open">OPEN NOTE ↗</span>
         </button>
-
       </div>
     </section>
 
-    <!-- FINAL MESSAGE -->
     <section class="closing section-padding">
       <p class="eyebrow">THE FINAL PAGE</p>
-
-      <h2>
-        THE DAY IS<br>
-        <em>ALL YOURS.</em>
-      </h2>
-
+      <h2>THE DAY IS<br><em>ALL YOURS.</em></h2>
       <div class="closing-line"></div>
-
-      <p>
-        Happy birthday, Kadzo. Here's to an extraordinary new chapter.
-      </p>
-
-      <span class="closing-signature">
-        With appreciation, always.
-      </span>
+      <p>Happy birthday, Kadzo. Here's to an extraordinary new chapter.</p>
+      <span class="closing-signature">With appreciation, always.</span>
     </section>
-
   </main>
 
   <footer class="footer">
@@ -333,27 +224,16 @@
     <span>© KADZO DAY</span>
   </footer>
 
-  <!-- POPUP NOTES -->
   <div class="modal" id="noteModal" aria-hidden="true">
-
-    <div class="modal-content">
-
-      <button class="modal-close" id="close-modal" aria-label="Close">
-        ×
-      </button>
-
+    <div class="modal-content" role="dialog" aria-modal="true" aria-labelledby="noteTitle">
+      <button class="modal-close" id="close-modal" type="button" aria-label="Close">×</button>
       <p class="eyebrow">A PERSONAL NOTE</p>
-
       <h2 id="noteTitle">A note for you</h2>
-
       <p id="noteText"></p>
-
       <span class="modal-signature">— The Kadzo Edition</span>
-
     </div>
   </div>
 
-  <script src="script.js"></script>
-
+  <script src="script.js" defer></script>
 </body>
 </html>
