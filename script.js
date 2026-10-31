@@ -33,8 +33,7 @@ I hope you get to enjoy as many of them as possible.`
   }
 };
 
-// BIRTHDAY NOTES
-
+// Birthday notes
 const modal = document.getElementById("noteModal");
 const modalTitle = document.getElementById("noteTitle");
 const modalText = document.getElementById("noteText");
@@ -42,43 +41,40 @@ const closeButton = document.getElementById("close-modal");
 
 document.querySelectorAll(".note-card").forEach((button) => {
   button.addEventListener("click", () => {
-    const noteName = button.dataset.note;
-    const selectedNote = notes[noteName];
-
-    if (!selectedNote) return;
+    const selectedNote = notes[button.dataset.note];
+    if (!selectedNote || !modal) return;
 
     modalTitle.textContent = selectedNote.title;
     modalText.textContent = selectedNote.message;
 
     modal.classList.add("show");
     modal.setAttribute("aria-hidden", "false");
-
     document.body.style.overflow = "hidden";
   });
 });
 
 function closeModal() {
+  if (!modal) return;
   modal.classList.remove("show");
   modal.setAttribute("aria-hidden", "true");
   document.body.style.overflow = "";
 }
 
-closeButton.addEventListener("click", closeModal);
+if (closeButton) {
+  closeButton.addEventListener("click", closeModal);
+}
 
-modal.addEventListener("click", (event) => {
-  if (event.target === modal) {
-    closeModal();
-  }
-});
+if (modal) {
+  modal.addEventListener("click", (event) => {
+    if (event.target === modal) closeModal();
+  });
+}
 
 document.addEventListener("keydown", (event) => {
-  if (event.key === "Escape") {
-    closeModal();
-  }
+  if (event.key === "Escape") closeModal();
 });
 
-// BIRTHDAY MUSIC
-
+// Birthday music
 const welcomeScreen = document.getElementById("welcomeScreen");
 const enterButton = document.getElementById("enterSite");
 const birthdayMusic = document.getElementById("birthdayMusic");
@@ -87,47 +83,59 @@ const musicToggle = document.getElementById("musicToggle");
 const musicIndicator = document.getElementById("musicIndicator");
 
 function updateMusicControls() {
+  if (!birthdayMusic || !musicToggle) return;
+
   if (birthdayMusic.paused) {
     musicToggle.textContent = "▶";
     musicToggle.setAttribute("aria-label", "Play music");
-    musicIndicator.textContent = "♫";
   } else {
     musicToggle.textContent = "Ⅱ";
     musicToggle.setAttribute("aria-label", "Pause music");
-    musicIndicator.textContent = "♫";
+  }
+
+  if (musicIndicator) {
+    musicIndicator.textContent = birthdayMusic.paused ? "♫" : "♪";
   }
 }
 
 async function playBirthdayMusic() {
+  if (!birthdayMusic) return;
+
   try {
     await birthdayMusic.play();
     updateMusicControls();
   } catch (error) {
-    console.log("Music could not start. Tap the play button to try again.");
+    console.error("Music playback failed:", error);
     updateMusicControls();
   }
 }
 
-// ENTER THE WEBSITE AND START MUSIC
+if (enterButton) {
+  enterButton.addEventListener("click", async () => {
+    if (welcomeScreen) welcomeScreen.classList.add("hide");
+    if (musicPlayer) musicPlayer.classList.add("visible");
 
-enterButton.addEventListener("click", () => {
-  welcomeScreen.classList.add("hide");
-  musicPlayer.classList.add("visible");
+    await playBirthdayMusic();
+  });
+}
 
-  playBirthdayMusic();
-});
+if (musicToggle) {
+  musicToggle.addEventListener("click", async () => {
+    if (!birthdayMusic) return;
 
-// PLAY AND PAUSE
+    if (birthdayMusic.paused) {
+      await playBirthdayMusic();
+    } else {
+      birthdayMusic.pause();
+      updateMusicControls();
+    }
+  });
+}
 
-musicToggle.addEventListener("click", () => {
-  if (birthdayMusic.paused) {
-    playBirthdayMusic();
-  } else {
-    birthdayMusic.pause();
-    updateMusicControls();
-  }
-});
+if (birthdayMusic) {
+  birthdayMusic.addEventListener("play", updateMusicControls);
+  birthdayMusic.addEventListener("pause", updateMusicControls);
+  birthdayMusic.addEventListener("ended", updateMusicControls);
+}
 
-birthdayMusic.addEventListener("play", updateMusicControls);
-birthdayMusic.addEventListener("pause", updateMusicControls);
-birthdayMusic.addEventListener("ended", updateMusicControls);
+updateMusicControls();
