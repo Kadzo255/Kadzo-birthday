@@ -1,7 +1,87 @@
 document.addEventListener("DOMContentLoaded", function () {
   "use strict";
 
-  // BIRTHDAY NOTES
+  const music = document.getElementById("birthdayMusic");
+  const welcomeScreen = document.getElementById("welcomeScreen");
+  const enterButton = document.getElementById("enterSite");
+  const musicPlayer = document.getElementById("musicPlayer");
+  const musicToggle = document.getElementById("musicToggle");
+  const musicIndicator = document.getElementById("musicIndicator");
+
+  // Music controls
+  function updateMusicButton() {
+    if (!music || !musicToggle) return;
+
+    const playing = !music.paused;
+
+    musicToggle.textContent = playing ? "Ⅱ" : "▶";
+    musicToggle.setAttribute(
+      "aria-label",
+      playing ? "Pause music" : "Play music"
+    );
+
+    if (musicIndicator) {
+      musicIndicator.textContent = playing ? "♪" : "♫";
+    }
+  }
+
+  async function playMusic() {
+    if (!music) return;
+
+    try {
+      music.volume = 1;
+      await music.play();
+      updateMusicButton();
+    } catch (error) {
+      console.error("Music playback error:", error);
+      updateMusicButton();
+      alert("The music could not start. Please check the song file and your browser.");
+    }
+  }
+
+  if (enterButton) {
+    enterButton.addEventListener("click", function () {
+      if (welcomeScreen) {
+        welcomeScreen.classList.add("hide");
+      }
+
+      if (musicPlayer) {
+        musicPlayer.classList.add("visible");
+      }
+
+      playMusic();
+    });
+  }
+
+  if (musicToggle) {
+    musicToggle.addEventListener("click", function () {
+      if (!music) return;
+
+      if (music.paused) {
+        playMusic();
+      } else {
+        music.pause();
+        updateMusicButton();
+      }
+    });
+  }
+
+  if (music) {
+    music.addEventListener("play", updateMusicButton);
+    music.addEventListener("pause", updateMusicButton);
+    music.addEventListener("ended", updateMusicButton);
+
+    music.addEventListener("error", function () {
+      console.error(
+        "The music file could not be loaded. Check that fire-on-fire.mp3 is in the same folder as index.html."
+      );
+      updateMusicButton();
+    });
+  }
+
+  updateMusicButton();
+
+  // Birthday notes
   const notes = {
     birthday: {
       title: "Happy birthday, Kadzo.",
@@ -37,7 +117,6 @@ I hope you get to enjoy as many of them as possible.`
     }
   };
 
-  // NOTES POPUP
   const modal = document.getElementById("noteModal");
   const modalTitle = document.getElementById("noteTitle");
   const modalText = document.getElementById("noteText");
@@ -83,87 +162,4 @@ I hope you get to enjoy as many of them as possible.`
       closeModal();
     }
   });
-
-  // BACKGROUND MUSIC
-  const welcomeScreen = document.getElementById("welcomeScreen");
-  const enterButton = document.getElementById("enterSite");
-  const music = document.getElementById("birthdayMusic");
-  const musicPlayer = document.getElementById("musicPlayer");
-  const musicToggle = document.getElementById("musicToggle");
-  const musicIndicator = document.getElementById("musicIndicator");
-
-  function updateMusicControls() {
-    if (!music || !musicToggle) return;
-
-    const playing = !music.paused && !music.ended;
-
-    musicToggle.textContent = playing ? "Ⅱ" : "▶";
-
-    musicToggle.setAttribute(
-      "aria-label",
-      playing ? "Pause music" : "Play music"
-    );
-
-    if (musicIndicator) {
-      musicIndicator.textContent = playing ? "♪" : "♫";
-    }
-  }
-
-  async function playMusic() {
-    if (!music) return;
-
-    try {
-      await music.play();
-    } catch (error) {
-      console.error(
-        "Music could not play. Check that fire-on-fire.mp3 exists in the repository root.",
-        error
-      );
-    }
-
-    updateMusicControls();
-  }
-
-  if (enterButton) {
-    enterButton.addEventListener("click", function () {
-      if (welcomeScreen) {
-        welcomeScreen.classList.add("hide");
-      }
-
-      if (musicPlayer) {
-        musicPlayer.classList.add("visible");
-      }
-
-      playMusic();
-    });
-  }
-
-  if (musicToggle) {
-    musicToggle.addEventListener("click", function () {
-      if (!music) return;
-
-      if (music.paused) {
-        playMusic();
-      } else {
-        music.pause();
-        updateMusicControls();
-      }
-    });
-  }
-
-  if (music) {
-    music.addEventListener("play", updateMusicControls);
-    music.addEventListener("pause", updateMusicControls);
-    music.addEventListener("ended", updateMusicControls);
-
-    music.addEventListener("error", function () {
-      console.error(
-        "Audio file error. Confirm the exact filename is fire-on-fire.mp3."
-      );
-
-      updateMusicControls();
-    });
-  }
-
-  updateMusicControls();
 });
