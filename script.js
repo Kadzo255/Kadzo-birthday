@@ -1,14 +1,11 @@
 document.addEventListener("DOMContentLoaded", function () {
-  "use strict";
 
   const music = document.getElementById("birthdayMusic");
   const welcomeScreen = document.getElementById("welcomeScreen");
   const enterButton = document.getElementById("enterSite");
   const musicPlayer = document.getElementById("musicPlayer");
   const musicToggle = document.getElementById("musicToggle");
-  const musicIndicator = document.getElementById("musicIndicator");
 
-  // Music controls
   function updateMusicButton() {
     if (!music || !musicToggle) return;
 
@@ -19,44 +16,31 @@ document.addEventListener("DOMContentLoaded", function () {
       "aria-label",
       playing ? "Pause music" : "Play music"
     );
-
-    if (musicIndicator) {
-      musicIndicator.textContent = playing ? "♪" : "♫";
-    }
   }
 
   async function playMusic() {
     if (!music) return;
 
     try {
-      music.volume = 1;
       await music.play();
       updateMusicButton();
     } catch (error) {
       console.error("Music playback error:", error);
       updateMusicButton();
-      alert("The music could not start. Please check the song file and your browser.");
+      alert("The song could not play. Check that fire-on-fire.mp3 is uploaded beside index.html.");
     }
   }
 
   if (enterButton) {
     enterButton.addEventListener("click", function () {
-      if (welcomeScreen) {
-        welcomeScreen.classList.add("hide");
-      }
-
-      if (musicPlayer) {
-        musicPlayer.classList.add("visible");
-      }
-
+      welcomeScreen.classList.add("hide");
+      musicPlayer.classList.add("visible");
       playMusic();
     });
   }
 
   if (musicToggle) {
     musicToggle.addEventListener("click", function () {
-      if (!music) return;
-
       if (music.paused) {
         playMusic();
       } else {
@@ -69,19 +53,12 @@ document.addEventListener("DOMContentLoaded", function () {
   if (music) {
     music.addEventListener("play", updateMusicButton);
     music.addEventListener("pause", updateMusicButton);
-    music.addEventListener("ended", updateMusicButton);
-
     music.addEventListener("error", function () {
-      console.error(
-        "The music file could not be loaded. Check that fire-on-fire.mp3 is in the same folder as index.html."
-      );
+      console.error("Could not load fire-on-fire.mp3. Check the filename.");
       updateMusicButton();
     });
   }
 
-  updateMusicButton();
-
-  // Birthday notes
   const notes = {
     birthday: {
       title: "Happy birthday, Kadzo.",
@@ -98,7 +75,7 @@ Have a beautiful birthday.`
       title: "A reminder about you.",
       message: `I hope you never lose the things that make you unmistakably you.
 
-Your eye for style, your love for capturing moments, your interests and all those little details that make up your personality.
+Your eye for style, your interests and all those little details that make up your personality.
 
 Keep exploring, keep discovering new things and keep being yourself.
 
@@ -109,7 +86,7 @@ There's so much more ahead of you.`
       title: "For another day.",
       message: `Here's a reminder for an ordinary day:
 
-Take the pictures. Wear the outfit. Try the food. Visit the place you've been saving on Pinterest. Make the memories.
+Take the pictures. Wear the outfit. Try the food. Visit the place you've been saving. Make the memories.
 
 Life has so many beautiful experiences waiting for you.
 
@@ -126,7 +103,7 @@ I hope you get to enjoy as many of them as possible.`
     button.addEventListener("click", function () {
       const note = notes[button.dataset.note];
 
-      if (!note || !modal || !modalTitle || !modalText) return;
+      if (!note) return;
 
       modalTitle.textContent = note.title;
       modalText.textContent = note.message;
@@ -138,28 +115,25 @@ I hope you get to enjoy as many of them as possible.`
   });
 
   function closeModal() {
-    if (!modal) return;
-
     modal.classList.remove("show");
     modal.setAttribute("aria-hidden", "true");
     document.body.style.overflow = "";
   }
 
-  if (closeButton) {
-    closeButton.addEventListener("click", closeModal);
-  }
+  closeButton.addEventListener("click", closeModal);
 
-  if (modal) {
-    modal.addEventListener("click", function (event) {
-      if (event.target === modal) {
-        closeModal();
-      }
-    });
-  }
+  modal.addEventListener("click", function (event) {
+    if (event.target === modal) {
+      closeModal();
+    }
+  });
 
   document.addEventListener("keydown", function (event) {
     if (event.key === "Escape") {
       closeModal();
     }
   });
+
+  updateMusicButton();
+
 });
